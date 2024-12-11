@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище MebelModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BrendTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BrendNaimenov" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ColorTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ColorNaimenov" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SleepAccessories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naimenov" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cena" Type="money" Nullable="false" />
+          <Property Name="BrendID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="srokdostavki" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ColorID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeNaimenov" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SleepAccessories_BrendTable">
+          <End Role="BrendTable" Type="Self.BrendTable" Multiplicity="1" />
+          <End Role="SleepAccessories" Type="Self.SleepAccessories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrendTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SleepAccessories">
+              <PropertyRef Name="BrendID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SleepAccessories_ColorTable">
+          <End Role="ColorTable" Type="Self.ColorTable" Multiplicity="1" />
+          <End Role="SleepAccessories" Type="Self.SleepAccessories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColorTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SleepAccessories">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SleepAccessories_TypeTable">
+          <End Role="TypeTable" Type="Self.TypeTable" Multiplicity="1" />
+          <End Role="SleepAccessories" Type="Self.SleepAccessories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SleepAccessories">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище MebelModelContainer">
+          <EntitySet Name="BrendTable" EntityType="Self.BrendTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ColorTable" EntityType="Self.ColorTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SleepAccessories" EntityType="Self.SleepAccessories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeTable" EntityType="Self.TypeTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SleepAccessories_BrendTable" Association="Self.FK_SleepAccessories_BrendTable">
+            <End Role="BrendTable" EntitySet="BrendTable" />
+            <End Role="SleepAccessories" EntitySet="SleepAccessories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SleepAccessories_ColorTable" Association="Self.FK_SleepAccessories_ColorTable">
+            <End Role="ColorTable" EntitySet="ColorTable" />
+            <End Role="SleepAccessories" EntitySet="SleepAccessories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SleepAccessories_TypeTable" Association="Self.FK_SleepAccessories_TypeTable">
+            <End Role="TypeTable" EntitySet="TypeTable" />
+            <End Role="SleepAccessories" EntitySet="SleepAccessories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MebelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BrendTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BrendNaimenov" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SleepAccessories" Relationship="Self.FK_SleepAccessories_BrendTable" FromRole="BrendTable" ToRole="SleepAccessories" />
+        </EntityType>
+        <EntityType Name="ColorTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ColorNaimenov" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SleepAccessories" Relationship="Self.FK_SleepAccessories_ColorTable" FromRole="ColorTable" ToRole="SleepAccessories" />
+        </EntityType>
+        <EntityType Name="SleepAccessories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naimenov" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cena" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="BrendID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="srokdostavki" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ColorID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BrendTable" Relationship="Self.FK_SleepAccessories_BrendTable" FromRole="SleepAccessories" ToRole="BrendTable" />
+          <NavigationProperty Name="ColorTable" Relationship="Self.FK_SleepAccessories_ColorTable" FromRole="SleepAccessories" ToRole="ColorTable" />
+          <NavigationProperty Name="TypeTable" Relationship="Self.FK_SleepAccessories_TypeTable" FromRole="SleepAccessories" ToRole="TypeTable" />
+        </EntityType>
+        <EntityType Name="TypeTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeNaimenov" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SleepAccessories" Relationship="Self.FK_SleepAccessories_TypeTable" FromRole="TypeTable" ToRole="SleepAccessories" />
+        </EntityType>
+        <Association Name="FK_SleepAccessories_BrendTable">
+          <End Role="BrendTable" Type="Self.BrendTable" Multiplicity="1" />
+          <End Role="SleepAccessories" Type="Self.SleepAccessories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrendTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SleepAccessories">
+              <PropertyRef Name="BrendID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SleepAccessories_ColorTable">
+          <End Role="ColorTable" Type="Self.ColorTable" Multiplicity="1" />
+          <End Role="SleepAccessories" Type="Self.SleepAccessories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColorTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SleepAccessories">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SleepAccessories_TypeTable">
+          <End Role="TypeTable" Type="Self.TypeTable" Multiplicity="1" />
+          <End Role="SleepAccessories" Type="Self.SleepAccessories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SleepAccessories">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MebelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BrendTable" EntityType="Self.BrendTable" />
+          <EntitySet Name="ColorTable" EntityType="Self.ColorTable" />
+          <EntitySet Name="SleepAccessories" EntityType="Self.SleepAccessories" />
+          <EntitySet Name="TypeTable" EntityType="Self.TypeTable" />
+          <AssociationSet Name="FK_SleepAccessories_BrendTable" Association="Self.FK_SleepAccessories_BrendTable">
+            <End Role="BrendTable" EntitySet="BrendTable" />
+            <End Role="SleepAccessories" EntitySet="SleepAccessories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SleepAccessories_ColorTable" Association="Self.FK_SleepAccessories_ColorTable">
+            <End Role="ColorTable" EntitySet="ColorTable" />
+            <End Role="SleepAccessories" EntitySet="SleepAccessories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SleepAccessories_TypeTable" Association="Self.FK_SleepAccessories_TypeTable">
+            <End Role="TypeTable" EntitySet="TypeTable" />
+            <End Role="SleepAccessories" EntitySet="SleepAccessories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MebelModelContainer" CdmEntityContainer="MebelEntities">
+          <EntitySetMapping Name="BrendTable">
+            <EntityTypeMapping TypeName="MebelModel.BrendTable">
+              <MappingFragment StoreEntitySet="BrendTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BrendNaimenov" ColumnName="BrendNaimenov" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColorTable">
+            <EntityTypeMapping TypeName="MebelModel.ColorTable">
+              <MappingFragment StoreEntitySet="ColorTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ColorNaimenov" ColumnName="ColorNaimenov" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SleepAccessories">
+            <EntityTypeMapping TypeName="MebelModel.SleepAccessories">
+              <MappingFragment StoreEntitySet="SleepAccessories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="naimenov" ColumnName="naimenov" />
+                <ScalarProperty Name="cena" ColumnName="cena" />
+                <ScalarProperty Name="BrendID" ColumnName="BrendID" />
+                <ScalarProperty Name="srokdostavki" ColumnName="srokdostavki" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeTable">
+            <EntityTypeMapping TypeName="MebelModel.TypeTable">
+              <MappingFragment StoreEntitySet="TypeTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeNaimenov" ColumnName="TypeNaimenov" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
